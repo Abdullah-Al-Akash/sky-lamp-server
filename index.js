@@ -54,7 +54,7 @@ async function run() {
                         const updateDoc = { $set: { role: 'admin' } };
                         const result = await usersCollection.updateOne(filter, updateDoc);
                         res.json(result);
-                })
+                });
 
                 // Check Admin or Not:
                 app.get('/users/:email', async (req, res) => {
@@ -66,7 +66,7 @@ async function run() {
                                 isAdmin = true
                         }
                         res.json({ admin: isAdmin });
-                })
+                });
 
                 // GET All Products API:
                 app.get('/products', async (req, res) => {
