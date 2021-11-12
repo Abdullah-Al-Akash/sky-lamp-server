@@ -56,6 +56,18 @@ async function run() {
                         res.json(result);
                 })
 
+                // Check Admin or Not:
+                app.get('/users/:email', async (req, res) => {
+                        const email = req.params.email;
+                        const query = { email: email };
+                        const user = await usersCollection.findOne(query);
+                        let isAdmin = false;
+                        if (user?.role === 'admin') {
+                                isAdmin = true
+                        }
+                        res.json({ admin: isAdmin });
+                })
+
                 // GET All Products API:
                 app.get('/products', async (req, res) => {
                         const cursor = productsCollection.find({});
